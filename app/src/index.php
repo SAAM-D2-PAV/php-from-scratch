@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 $a = 'Hello World </br>';
+//copie par valeur
 $b = $a;
+//copie par référence
+$b2 = &$a;
 
 //echo $b;
 $b = "Bonjour le monde";
@@ -65,3 +68,15 @@ $test = 42;
 $addition = fn (int | float $a, int $b): int | float => $a + $b + $test;
 
 echo $addition(2, 3); // 47
+
+// array_splice ( array &$array , int $offset , int|null $length = null , mixed $replacement = [] ) : array
+$tableau = [1, 2, 3, 4];
+array_splice($tableau, -2);
+
+print_r($tableau);
+
+/* Array
+(
+  [0] => 1
+  [1] => 2
+) */

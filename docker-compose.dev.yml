@@ -22,7 +22,7 @@ services:
         source: tls
         target: /root/.symfony5/certs
       - type: bind
-        source: ./app
+        source: ./app/src
         target: /app
       - type: volume
         target: /app/vendor
