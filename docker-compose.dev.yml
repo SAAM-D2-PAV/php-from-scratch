@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_php_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: phpfromscratchpwd
+      MYSQL_DATABASE: php-from-scratch-db
+      MYSQL_PASSWORD: phpfromscratchpwd
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3506:3306"
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    volumes:
+      - type: volume
+        source: tls
+        target: /root/.symfony5/certs
+      - type: bind
+        source: ./app
+        target: /app
+      - type: volume
+        target: /app/vendor
+    ports:
+      - 8000:8000
+
+volumes:
+  mysql_data:
+    driver: local
+  tls:
+

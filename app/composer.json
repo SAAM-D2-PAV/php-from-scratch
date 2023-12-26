@@ -1,0 +1,15 @@
+{
+    "name": "mle-ray/app",
+    "autoload": {
+        "psr-4": {
+            "MleRay\\App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mathieu Le Ray",
+            "email": "leraymathieu@gmail.com"
+        }
+    ],
+    "require": {}
+}
