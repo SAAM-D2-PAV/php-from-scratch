@@ -27,7 +27,7 @@ services:
       - type: volume
         target: /app/vendor
     ports:
-      - 8000:8000
+      - 8080:8000
 
 volumes:
   mysql_data:
