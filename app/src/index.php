@@ -1,4 +1,23 @@
 <?php
+require_once 'projet.php';
+
+$user = new Projet\User('Paul');
+Projet\compter($user->name); // 4
+echo '<br>';
+echo Projet\A; // 42
+
+//Ou
+use Projet\User;
+use const Projet\A;
+use function Projet\compter;
+
+require_once 'projet.php';
+
+$user = new User('Paul');
+compter($user->name); // 4
+echo '<br>';
+echo A; // 42
+
 
 class Reader
 {
