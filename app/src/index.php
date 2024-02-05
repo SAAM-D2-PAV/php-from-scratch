@@ -1,80 +1,27 @@
 <?php
 require_once 'projet.php';
+require_once 'Reader.php';
 
-$user = new Projet\User('Paul');
-Projet\compter($user->name); // 4
-echo '<br>';
-echo Projet\A; // 42
-
-//Ou
 use Projet\User;
-use const Projet\A;
-use function Projet\compter;
-
-require_once 'projet.php';
-
-$user = new User('Paul');
-compter($user->name); // 4
-echo '<br>';
-echo A; // 42
-
-
-class Reader
-{
-    function __construct(public $filename)
-    {
-        if (file_exists($filename)) {
-            $this->handle = fopen($filename, 'r');
-        } else {
-            echo "Le fichier n'existe pas";
-        }
-        echo 'construct call';
-    }
-
-    function read()
-    {
-        echo fread($this->handle, 10);
-    }
-
-    function __destruct()
-    {
-        fclose($this->handle);
-        echo 'destruct call';
-    }
-}
+use Reader\Reader;
+// use const Projet\A;
+// use function Projet\compter;
 
 
 $reader = new Reader(__DIR__ . '/test.txt');
-
 $reader->read();
 
-//****************************************************************** */
+//Instantiate the reflection object
+$reflector = new ReflectionClass('Reader\Reader');
+//Now get all the properties from class A in to $properties array
+$properties = $reflector->getAttributes();
+//print_r($properties);
 
+$string1 = "<h1>Opérateur de résolution de portée :: </h1>";
 
-class User
-{
-    public bool $isAdmin = false;
+$string2 = "<p> Un attribut statique est lié à une classe et non à un objet --> :: pour l'appeler dans la classe self:: dans l'objet MaClass::MaFonction() </p>";
 
-    function __construct(public string $prenom, public string $nom)
-    {
-    }
-
-    function direBonjour($prenom, $nom)
-    {
-        echo "Bonjour, je suis $prenom $nom";
-    }
-}
-
-class Admin extends User
-{
-    public bool $isAdmin = true;
-    function direBonjour($prenom, $nom)
-    {
-        parent::direBonjour($prenom, $nom);
-        echo " et je suis un admin. <br>";
-    }
-}
-
-$dupont = new Admin('Jean', 'Dupont');
-$dupont->direBonjour('Jean', 'Dupont'); // Bonjour, je suis Jean Dupont.
-echo $dupont->isAdmin; // 1
+$string3 = "<p>Une constante de class appartient aussi à une class donc MaClass::Maconstante et ne peut pas être modifiée !!!!! alors qu'un attribut statique oui</p>";
+echo $string1;
+echo $string2;
+echo $string3;
